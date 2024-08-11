@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="mt-4 p-3 bg-dark text-light">
+    <div className="p-3 bg-dark text-light border-top border-body">
       <div className="card-body">
         <h5 className="card-title">
           © 2021 - Pizzería Mamma Mia! - Todos los derechos reservados

@@ -3,7 +3,7 @@ import pizza from "../assets/img/pizza.png";
 
 function Header() {
   return (
-    <div>
+    <div className="bg-dark text-light">
       <div className="card text-bg-dark">
         <img
           src={pizza}
