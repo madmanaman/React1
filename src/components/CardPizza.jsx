@@ -5,28 +5,31 @@ import {
   faCartShopping,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
+import pizzas from "../pizzas";
 
 // Función para formatear números con separadores de miles
 const formatNumber = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
-const CardPizza = (props) => {
-  const price = Number(props.price);
-  const precioFormateado = formatNumber(price); // Utilizar la función personalizada para formatear el precio
+const CardPizza = ({ pizzas }) => {
+  const price = Number(pizzas.price);
+  const precioFormateado = formatNumber(price); //función personalizada para formatear el precio
 
   return (
     <div>
       <div className="card bg-light">
-        <img src={props.img} className="card-img-top" alt={props.name} />
+        <img src={pizzas.img} className="card-img-top" alt={pizzas.name} />
         <div className="card-body">
-          <h5 className="card-title">{props.name}</h5>
+          <h5 className="card-title">{pizzas.name}</h5>
           <hr />
           <h6 className="text-center">Ingredientes:</h6>
-          <p className="card-text text-center">
+          <ul className="card-text text-center">
             <FontAwesomeIcon icon={faPizzaSlice} />{" "}
-            {props.ingredients.join(", ")}
-          </p>
+            {pizzas.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
           <hr />
           <h6>Precio: ${precioFormateado}</h6>
           <div className="d-flex justify-content-between">

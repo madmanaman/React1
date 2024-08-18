@@ -1,7 +1,7 @@
 import React from "react";
 import pizza from "../assets/img/pizza.png";
 
-function Header() {
+const Header = () => {
   return (
     <div className="bg-dark text-light">
       <div className="card text-bg-dark">
@@ -20,6 +20,6 @@ function Header() {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

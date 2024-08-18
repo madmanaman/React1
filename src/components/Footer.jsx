@@ -1,6 +1,6 @@
 import React from "react";
 
-function Footer() {
+const Footer = () => {
   return (
     <div className="p-3 bg-dark text-light border-top border-body">
       <div className="card-body">
@@ -10,6 +10,6 @@ function Footer() {
       </div>
     </div>
   );
-}
+};
 
 export default Footer;

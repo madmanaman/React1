@@ -8,7 +8,7 @@ import {
   faPizzaSlice,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar() {
+const Navbar = () => {
   const total = 25000;
   const totalFormateado = total.toLocaleString("es-ES");
   const token = false;
@@ -75,6 +75,6 @@ function Navbar() {
       </nav>
     </div>
   );
-}
+};
 
 export default Navbar;

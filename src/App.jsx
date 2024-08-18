@@ -1,21 +1,24 @@
-import { useState } from "react";
+//import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
-import Register from "./components/Register";
-import Login from "./components/Login";
+//import Register from "./components/Register";
+//import Login from "./components/Login";
+import pizzas from "./pizzas.js";
+import Cart from "./components/Cart.jsx";
 
-function App() {
+const App = () => {
   return (
     <>
       <Navbar />
-      {/*<Home />*/}
+      <Cart pizzas={pizzas} />
+      {/*<Home pizzas={pizzas} />*/}
+      {/*<Login />*/}
       {/* <Register />*/}
-      <Login />
       <Footer />
     </>
   );
-}
+};
 
 export default App;
