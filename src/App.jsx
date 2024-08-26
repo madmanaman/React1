@@ -1,22 +1,36 @@
 //import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+//import Home from "./components/Home";
 import Footer from "./components/Footer";
 //import Register from "./components/Register";
 //import Login from "./components/Login";
-import pizzas from "./pizzas.js";
-import Cart from "./components/Cart.jsx";
+//import Cart from "./components/Cart.jsx";
+import { useEffect, useState } from "react";
+import Pizza from "./components/Pizza.jsx";
 
 const App = () => {
+  const [pizzas, setPizzas] = useState([]);
+
+  const obtenerArray = async () => {
+    const respuesta = await fetch("http://localhost:5000/api/pizzas");
+    const data = await respuesta.json();
+    setPizzas(data);
+  };
+
+  useEffect(() => {
+    obtenerArray();
+  }, []);
   return (
     <>
       <Navbar />
-      <Cart pizzas={pizzas} />
+      <Pizza />
+      <Footer />
+      {/*<Pizza />*/}
       {/*<Home pizzas={pizzas} />*/}
+      {/*<Cart pizzas={pizzas} />*/}
       {/*<Login />*/}
       {/* <Register />*/}
-      <Footer />
     </>
   );
 };

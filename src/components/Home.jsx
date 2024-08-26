@@ -1,6 +1,6 @@
-import React from "react";
 import Header from "./Header";
 import CardPizza from "./CardPizza";
+import { useEffect, useState } from "react";
 
 const Home = ({ pizzas }) => {
   return (
