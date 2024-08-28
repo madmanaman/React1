@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartShopping,
@@ -7,11 +8,13 @@ import {
   faLockOpen,
   faPizzaSlice,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Navbar = () => {
+  const token = false;
   const total = 25000;
   const totalFormateado = total.toLocaleString("es-ES");
-  const token = false;
+
   let espacio = " ";
 
   return (
@@ -21,55 +24,67 @@ const Navbar = () => {
         data-bs-theme="dark"
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             Pizzería Mamma Mia!
-          </a>
+          </Link>
           <form className="d-flex container-fluid justify-content-start">
             <div className="d-flex me-auto">
-              <button className="btn btn-outline-success me-2" type="button">
-                <FontAwesomeIcon icon={faPizzaSlice} />
-                {espacio} Home
-              </button>
+              <Link to="/">
+                <button className="btn btn-outline-success me-2" type="button">
+                  <FontAwesomeIcon icon={faPizzaSlice} />
+                  {espacio} Home
+                </button>
+              </Link>
 
               {token ? (
                 <>
-                  <button
-                    className="btn btn-outline-success me-2"
-                    type="button"
-                  >
-                    <FontAwesomeIcon icon={faLockOpen} />
-                    {espacio} Profile
-                  </button>
-                  <button
-                    className="btn btn-outline-success me-2"
-                    type="button"
-                  >
-                    <FontAwesomeIcon icon={faLock} /> {espacio} Logout
-                  </button>
+                  <Link to="profile">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faLockOpen} />
+                      {espacio} Profile
+                    </button>
+                  </Link>
+
+                  <Link to="/">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faLock} /> {espacio} Logout
+                    </button>
+                  </Link>
                 </>
               ) : (
                 <>
-                  <button
-                    className="btn btn-outline-success me-2"
-                    type="button"
-                  >
-                    <FontAwesomeIcon icon={faKey} />
-                    {espacio} Login
-                  </button>
-                  <button
-                    className="btn btn-outline-success me-2"
-                    type="button"
-                  >
-                    <FontAwesomeIcon icon={faKey} /> Register
-                  </button>
+                  <Link to="/login">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faKey} />
+                      {espacio} Login
+                    </button>
+                  </Link>
+                  <Link to="/register">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faKey} /> Register
+                    </button>
+                  </Link>
                 </>
               )}
             </div>
-
-            <button className="btn btn-outline-success" type="button">
-              <FontAwesomeIcon icon={faCartShopping} />
-              {espacio} Total: ${totalFormateado}
-            </button>
+            <Link to="/cart">
+              <button className="btn btn-outline-success" type="button">
+                <FontAwesomeIcon icon={faCartShopping} />
+                {espacio} Total: ${totalFormateado}
+              </button>
+            </Link>
           </form>
         </div>
       </nav>
