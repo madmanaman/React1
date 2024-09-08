@@ -13,10 +13,10 @@ const NotFound = () => {
           style={{ maxHeight: "90vh" }}
         />
         <div className="card-img-overlay ">
-          <h1 className="card-title">
+          <h1 className="card-title text-center">
             Te perdiste, mejor vamos por una pizza{" "}
             <Link to="/" className="" style={{ textDecoration: "none" }}>
-              <span class="badge text-bg-info">🍕</span>
+              <span className="badge text-bg-info">🍕</span>
             </Link>
           </h1>
         </div>

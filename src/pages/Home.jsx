@@ -1,8 +1,11 @@
+import React, { useContext } from "react";
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
-import { useEffect, useState } from "react";
+import { PizzaContext } from "../context/PizzasContext";
 
-const Home = ({ pizzas }) => {
+const Home = () => {
+  const { pizzas } = useContext(PizzaContext);
+
   return (
     <div>
       <Header />
@@ -11,7 +14,7 @@ const Home = ({ pizzas }) => {
           <div className="row">
             {pizzas.map((pizza) => (
               <div className="col-md-4 pt-4" key={pizza.id}>
-                <CardPizza pizzas={pizza} />
+                <CardPizza pizza={pizza}></CardPizza>
               </div>
             ))}
           </div>

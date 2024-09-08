@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,12 +8,16 @@ import {
   faLockOpen,
   faPizzaSlice,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { PizzaContext } from "../context/PizzasContext"; // Importamos el contexto
 
 const Navbar = () => {
   const token = false;
-  const total = 25000;
-  const totalFormateado = total.toLocaleString("es-ES");
+
+  // Usamos el contexto para obtener el totalPrice
+  const { totalPrice } = useContext(PizzaContext);
+
+  // Formatear el total para que aparezca con separador de miles
+  const totalFormateado = totalPrice.toLocaleString("es-ES");
 
   let espacio = " ";
 
@@ -82,7 +86,7 @@ const Navbar = () => {
             <Link to="/cart">
               <button className="btn btn-outline-success" type="button">
                 <FontAwesomeIcon icon={faCartShopping} />
-                {espacio} Total: ${totalFormateado}
+                {espacio} Total: ${totalFormateado} {/* Total dinámico */}
               </button>
             </Link>
           </form>

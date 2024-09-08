@@ -11,7 +11,7 @@ const Header = () => {
           alt="..."
           style={{ height: "200px" }}
         />
-        <div className="card-img-overlay d-flex flex-column justify-content-center">
+        <div className="card-img-overlay d-flex flex-column justify-content-center text-center">
           <h1 className="card-title">¡Pizzería Mamma Mia!</h1>
           <p className="card-text center">
             ¡Tenemos las mejores pizzas que podrás encontrar!
