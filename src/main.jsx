@@ -4,11 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { PizzaProvider } from "./context/PizzasContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <PizzaProvider>
+        <App />
+      </PizzaProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

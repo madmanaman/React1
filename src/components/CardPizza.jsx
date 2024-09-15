@@ -6,6 +6,7 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { PizzaContext } from "../context/PizzasContext";
+import { useNavigate } from "react-router-dom";
 
 // Función para formatear números con separadores de miles
 const formatNumber = (num) => {
@@ -13,6 +14,7 @@ const formatNumber = (num) => {
 };
 
 const CardPizza = ({ pizza }) => {
+  const navigate = useNavigate();
   const price = Number(pizza.price);
   const precioFormateado = formatNumber(price); // formatea el precio
 
@@ -34,9 +36,13 @@ const CardPizza = ({ pizza }) => {
           <hr />
           <h6>Precio: ${precioFormateado}</h6>
           <div className="d-flex justify-content-between">
-            <a href="#" className="btn btn-light border">
+            <button
+              href="#"
+              className="btn btn-light border"
+              onClick={() => navigate(`/pizza/${pizza.id}`)}
+            >
               Ver Más <FontAwesomeIcon icon={faEye} />
-            </a>
+            </button>
 
             <button
               className="btn btn-dark"

@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const PizzaContext = createContext();
 
 export const PizzaProvider = ({ children }) => {
-  //estado pizzas obtenidas de la API
+  //array pizzas obtenidas de la API
   const [pizzas, setPizzas] = useState([]);
 
   // Estado para manejar el carrito
@@ -65,9 +65,23 @@ export const PizzaProvider = ({ children }) => {
     });
   };
 
+  //token login
+  const [token, setToken] = useState(true);
+  const chancheToken = () => {
+    setToken(!setToken);
+  };
+
   return (
     <PizzaContext.Provider
-      value={{ pizzas, cart, totalPrice, addPizzaToCart, removePizzaFromCart }}
+      value={{
+        pizzas,
+        cart,
+        totalPrice,
+        token,
+        chancheToken,
+        addPizzaToCart,
+        removePizzaFromCart,
+      }}
     >
       {children}
     </PizzaContext.Provider>

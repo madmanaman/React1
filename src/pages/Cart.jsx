@@ -8,7 +8,7 @@ const formatNumber = (num) => {
 };
 
 const Cart = () => {
-  const { cart, totalPrice, addPizzaToCart, removePizzaFromCart } =
+  const { cart, totalPrice, addPizzaToCart, removePizzaFromCart, token } =
     useContext(PizzaContext);
 
   return (
@@ -69,6 +69,15 @@ const Cart = () => {
           <div className="col text-right">
             <h2>Total a pagar: ${formatNumber(totalPrice)}</h2>{" "}
           </div>
+          {totalPrice > 0 && token == false ? (
+            <h2>Debes iniciar sesión para pagar.</h2>
+          ) : token && totalPrice > 0 ? (
+            <button className="btn btn-success me-2" type="button">
+              Pagar
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

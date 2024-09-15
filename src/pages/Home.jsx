@@ -5,7 +5,6 @@ import { PizzaContext } from "../context/PizzasContext";
 
 const Home = () => {
   const { pizzas } = useContext(PizzaContext);
-
   return (
     <div>
       <Header />
@@ -13,7 +12,7 @@ const Home = () => {
         <div className="container">
           <div className="row">
             {pizzas.map((pizza) => (
-              <div className="col-md-4 pt-4" key={pizza.id}>
+              <div className="col-md-4 pt-4" key={pizza.id} value={pizza.id}>
                 <CardPizza pizza={pizza}></CardPizza>
               </div>
             ))}

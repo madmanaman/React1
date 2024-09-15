@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { PizzaContext } from "../context/PizzasContext";
 
 const Profile = () => {
+  const { chancheToken } = useContext(PizzaContext);
+
   return (
     <div>
       <div className="container mt-5">
@@ -11,7 +14,11 @@ const Profile = () => {
         </div>
 
         <Link to="/">
-          <button className="btn btn-outline-success me-2 mb-2" type="button">
+          <button
+            className="btn btn-outline-success me-2 mb-2"
+            type="button"
+            onClick={() => chancheToken()}
+          >
             Cerrar Sesión
           </button>
         </Link>
