@@ -12,7 +12,7 @@ import { PizzaContext } from "../context/PizzasContext"; // Importamos el contex
 
 const Navbar = () => {
   // Usamos el contexto para obtener el totalPrice
-  const { totalPrice, chancheToken } = useContext(PizzaContext);
+  const { totalPrice, chancheToken, token } = useContext(PizzaContext);
 
   // Formatear el total para que aparezca con separador de miles
   const totalFormateado = totalPrice.toLocaleString("es-ES");
@@ -38,34 +38,48 @@ const Navbar = () => {
                 </button>
               </Link>
 
-              <Link to="profile">
-                <button className="btn btn-outline-success me-2" type="button">
-                  <FontAwesomeIcon icon={faLockOpen} />
-                  {espacio} Profile
-                </button>
-              </Link>
-
-              <Link to="/">
-                <button
-                  className="btn btn-outline-success me-2"
-                  type="button"
-                  onClick={() => chancheToken()}
-                >
-                  <FontAwesomeIcon icon={faLock} /> {espacio} Logout
-                </button>
-              </Link>
-
-              <Link to="/login">
-                <button className="btn btn-outline-success me-2" type="button">
-                  <FontAwesomeIcon icon={faKey} />
-                  {espacio} Login
-                </button>
-              </Link>
-              <Link to="/register">
-                <button className="btn btn-outline-success me-2" type="button">
-                  <FontAwesomeIcon icon={faKey} /> Register
-                </button>
-              </Link>
+              {token ? (
+                <>
+                  <Link to="profile">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faLockOpen} />
+                      {espacio} Profile
+                    </button>
+                  </Link>
+                  <Link to="/">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                      onClick={() => chancheToken()}
+                    >
+                      <FontAwesomeIcon icon={faLock} /> {espacio} Logout
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faKey} />
+                      {espacio} Login
+                    </button>
+                  </Link>
+                  <Link to="/register">
+                    <button
+                      className="btn btn-outline-success me-2"
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faKey} /> Register
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
             <Link to="/cart">
               <button className="btn btn-outline-success" type="button">
