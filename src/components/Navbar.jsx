@@ -12,7 +12,7 @@ import { PizzaContext } from "../context/PizzasContext"; // Importamos el contex
 
 const Navbar = () => {
   // Usamos el contexto para obtener el totalPrice
-  const { totalPrice, chancheToken, token } = useContext(PizzaContext);
+  const { totalPrice, handleLogout, user } = useContext(PizzaContext);
 
   // Formatear el total para que aparezca con separador de miles
   const totalFormateado = totalPrice.toLocaleString("es-ES");
@@ -38,7 +38,7 @@ const Navbar = () => {
                 </button>
               </Link>
 
-              {token ? (
+              {user ? (
                 <>
                   <Link to="profile">
                     <button
@@ -53,7 +53,7 @@ const Navbar = () => {
                     <button
                       className="btn btn-outline-success me-2"
                       type="button"
-                      onClick={() => chancheToken()}
+                      onClick={() => handleLogout()}
                     >
                       <FontAwesomeIcon icon={faLock} /> {espacio} Logout
                     </button>

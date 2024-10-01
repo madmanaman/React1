@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const PizzaContext = createContext();
 
@@ -11,6 +12,77 @@ export const PizzaProvider = ({ children }) => {
 
   // Estado precio total
   const [totalPrice, setTotalPrice] = useState(0);
+
+  //Estados login
+  const [userEmail, setEmail] = useState("");
+  const [token, setToken] = useState(null);
+  //estaod perfil
+  const [user, setUser] = useState(null);
+
+  //Funcion login
+  const handleLogin = async (emailInput, passwordInput) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email: emailInput,
+          password: passwordInput,
+        }
+      );
+      setToken(response.data.token);
+      setEmail(emailInput);
+      setUser({ email: emailInput });
+      localStorage.setItem("token", response.data.token);
+      alert("Correctamente logueado");
+    } catch (error) {
+      console.error("Error durante el login", error);
+      alert("Error durante el login");
+    }
+  };
+
+  //Funcion register
+  const handleRegister = async (emailInput, passwordInput) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          email: emailInput,
+          password: passwordInput,
+        }
+      );
+      setToken(response.data.token);
+      setEmail(emailInput);
+      localStorage.setItem("token", response.data.token);
+      alert("Registrado correctamente");
+    } catch (error) {
+      console.error("Error durante el login", error);
+      alert("Error durante el registro");
+    }
+  };
+
+  //user perfil
+
+  useEffect(() => {
+    const getUser = async () => {
+      const token = localStorage.getItem("token");
+      const response = await axios.get("http://localhost:5000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUser(response.data);
+    };
+    getUser();
+  }, []);
+
+  //logout
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // O elimina cualquier otro almacenamiento de sesión
+    setUser(null); // Limpia el estado del usuario
+    setToken(null); // Limpia el token
+    alert("Sesión cerrada");
+  };
 
   //  llamada a la API
   useEffect(() => {
@@ -64,11 +136,9 @@ export const PizzaProvider = ({ children }) => {
       return prevTotal - pizzaToRemove.price;
     });
   };
-
-  //token login
-  const [token, setToken] = useState(true);
-  const chancheToken = () => {
-    setToken(!setToken);
+  const handleClearCart = () => {
+    setCart([]); // Limpia el carrito
+    setTotalPrice(0); // Restablece el precio total
   };
 
   return (
@@ -78,9 +148,13 @@ export const PizzaProvider = ({ children }) => {
         cart,
         totalPrice,
         token,
-        chancheToken,
+        user,
+        handleLogout,
         addPizzaToCart,
         removePizzaFromCart,
+        handleLogin,
+        handleRegister,
+        handleClearCart,
       }}
     >
       {children}

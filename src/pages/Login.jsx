@@ -1,33 +1,23 @@
-import React from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { PizzaContext } from "../context/PizzasContext";
+import useInput from "../hooks/useInput.jsx";
+import axios from "axios";
 
 const Login = () => {
-  const [datos, setDatos] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const { handleLogin } = useContext(PizzaContext);
+  const email = useInput("");
+  const password = useInput("");
 
-  const actualizarFormulario = (e) => {
-    setDatos({
-      ...datos,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const enviarFormulario = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    alert("Te haz logeado correctamente");
-    setDatos({
-      email: "",
-      password: "",
-    });
+    handleLogin(email.value, password.value); // Pasa los valores directamente
   };
+
   return (
     <div className="bg-dark text-light">
       <div className="container ">
         <h1 className="pt-4">Login</h1>
-        <form onSubmit={enviarFormulario}>
+        <form onSubmit={onSubmit}>
           <div className="mb-3 pt-4">
             <h4 htmlFor="exampleFormControlInput1" className="form-label">
               Correo electronico
@@ -36,10 +26,10 @@ const Login = () => {
               required
               type="email"
               className="form-control"
-              value={datos.email}
+              value={email}
               name="email"
               placeholder="email@ejemplo.com"
-              onChange={actualizarFormulario}
+              {...email}
             />
           </div>
           <div className="pt-4">
@@ -51,17 +41,17 @@ const Login = () => {
               type="password"
               name="password"
               className="form-control"
-              value={datos.password}
+              value={password}
               aria-describedby="passwordHelpBlock"
-              onChange={actualizarFormulario}
+              {...password}
             ></input>
           </div>
           <br />
-          <div className="col-auto pt-4">
+          <div className="col-auto pt-4 d-flex justify-content-center">
             <button
               type="submit"
-              className="btn btn-outline-success mb-4"
-              disabled={datos.password.length < 6}
+              className="btn btn-outline-success mb-4 center"
+              disabled={password.value.length < 6}
             >
               Enviar
             </button>

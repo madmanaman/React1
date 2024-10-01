@@ -12,7 +12,7 @@ import Footer from "./components/Footer.jsx";
 import { PizzaContext } from "./context/PizzasContext.jsx";
 
 const App = () => {
-  const { token } = useContext(PizzaContext);
+  const { user } = useContext(PizzaContext);
 
   return (
     <>
@@ -21,16 +21,13 @@ const App = () => {
         <Route path="/" element={<Home />} />{" "}
         <Route
           path="/register"
-          element={token ? <Navigate to="/" /> : <Register />}
+          element={user ? <Navigate to="/" /> : <Register />}
         />
-        <Route
-          path="/login"
-          element={token ? <Navigate to="/" /> : <Login />}
-        />
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/cart" element={<Cart />} />{" "}
         <Route
           path="/profile"
-          element={token ? <Profile /> : <Navigate to="/login" />}
+          element={user ? <Profile /> : <Navigate to="/login" />}
         />
         <Route path="/pizza/:id" element={<Pizza />} />
         <Route path="/*" element={<NotFound />} />

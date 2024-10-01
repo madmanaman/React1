@@ -1,43 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import axios from "axios";
+import useInput from "../hooks/useInput.jsx";
+import { PizzaContext } from "../context/PizzasContext";
+
 const Register = () => {
-  const [datos, setDatos] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const { handleRegister } = useContext(PizzaContext);
+  const email = useInput("");
+  const password = useInput("");
+  const confirmPassword = useInput("");
 
-  const actualizarFormulario = (e) => {
-    setDatos({
-      ...datos,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const enviarFormulario = (e) => {
+  const enviarForm = (e) => {
     e.preventDefault();
-    if (datos.password.length < 6) {
+    if (password.value.length < 6) {
       alert("La contraseña debe tener al menos 6 caracteres");
       return;
-    }
-    if (datos.confirmPassword != datos.password) {
+    } else if (confirmPassword.value != password.value) {
       alert("Password y su confirmación no son iguales");
       return;
-    }
-    {
-      alert("Te haz registrado correctamente");
-      setDatos({
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+    } else {
+      handleRegister(email.value, password.value);
     }
   };
   return (
     <div className="bg-dark text-light">
       <div className="container">
         <h1 className="pt-4">Registrate</h1>
-        <form onSubmit={enviarFormulario}>
+        <form onSubmit={enviarForm}>
           <div className="mb-3 pt-4">
             <h4 htmlFor="exampleFormControlInput1" className="form-label">
               Correo electronico
@@ -46,10 +35,10 @@ const Register = () => {
               required
               type="email"
               className="form-control"
-              value={datos.email}
+              value={email}
               name="email"
               placeholder="email@ejemplo.com"
-              onChange={actualizarFormulario}
+              {...email}
             />
           </div>
           <div className="pt-4">
@@ -61,14 +50,14 @@ const Register = () => {
               type="password"
               name="password"
               className="form-control"
-              value={datos.password}
+              value={password}
               aria-describedby="passwordHelpBlock"
-              onChange={actualizarFormulario}
+              {...password}
             ></input>
             <div
               id="passwordHelpBlock"
               className="form-text"
-              hidden={datos.password.length > 5}
+              hidden={password.value.length > 5}
               style={{ color: "red" }}
             >
               El password debe tener al menos 6 caracteres
@@ -82,26 +71,26 @@ const Register = () => {
             <input
               required
               type="password"
-              value={datos.confirmPassword}
+              value={confirmPassword}
               name="confirmPassword"
               className="form-control"
               aria-describedby="passwordHelpBlock"
-              onChange={actualizarFormulario}
+              {...confirmPassword}
             ></input>
             <div
               id="passwordHelpBlock"
               className="form-text"
-              hidden={datos.password === datos.confirmPassword}
+              hidden={password.value === confirmPassword.value}
               style={{ color: "red" }}
             >
               Password y su confirmación no son iguales
             </div>
           </div>
-          <div className="col-auto pt-4">
+          <div className="col-auto pt-4 d-flex justify-content-center">
             <button
               type="submit"
               className="btn btn-outline-success mb-4"
-              disabled={datos.password.length < 6}
+              disabled={password.length < 6}
             >
               Enviar
             </button>
